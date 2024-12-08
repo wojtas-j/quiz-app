@@ -1,0 +1,90 @@
+{
+  "tests": [
+    {
+      "id": 1,
+      "title": "Test Wiedzy Ogólnej",
+      "introduction": "Witamy w Teście Wiedzy Ogólnej. Ten test sprawdzi Twoją wiedzę z różnych dziedzin. Powodzenia!",
+      "questions": [
+        {
+          "id": 1,
+          "question": "Jaka jest stolica Francji?",
+          "options": ["Berlin", "Londyn", "Paryż", "Madryt"],
+          "correctOption": 2
+        },
+        {
+          "id": 2,
+          "question": "Który pierwiastek chemiczny ma symbol 'O'?",
+          "options": ["Złoto", "Tlen", "Żelazo", "Srebro"],
+          "correctOption": 1
+        },
+        {
+          "id": 3,
+          "question": "Kto napisał dramat 'Romeo i Julia'?",
+          "options": ["William Shakespeare", "Lew Tołstoj", "Charles Dickens", "Mark Twain"],
+          "correctOption": 0
+        },
+        {
+          "id": 4,
+          "question": "Która planeta jest największa w Układzie Słonecznym?",
+          "options": ["Ziemia", "Jowisz", "Mars", "Wenus"],
+          "correctOption": 1
+        },
+        {
+          "id": 5,
+          "question": "Który kraj był gospodarzem Letnich Igrzysk Olimpijskich w 2016 roku?",
+          "options": ["Chiny", "Brazylia", "Wielka Brytania", "Rosja"],
+          "correctOption": 1
+        },
+        {
+          "id": 6,
+          "question": "Jak nazywa się proces, w którym rośliny wytwarzają własny pokarm?",
+          "options": ["Fotosynteza", "Oddychanie", "Trawienie", "Transpiracja"],
+          "correctOption": 0
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Test Matematyczny",
+      "introduction": "Sprawdź swoją wiedzę z matematyki. Powodzenia!",
+      "questions": [
+        {
+          "id": 1,
+          "question": "Ile wynosi wartość wyrażenia 2 + 2 * 2?",
+          "options": ["6", "8", "4", "10"],
+          "correctOption": 0
+        },
+        {
+          "id": 2,
+          "question": "Jaki jest pierwiastek kwadratowy z 81?",
+          "options": ["9", "8", "7", "6"],
+          "correctOption": 0
+        },
+        {
+          "id": 3,
+          "question": "Ile boków ma sześciokąt?",
+          "options": ["5", "6", "7", "8"],
+          "correctOption": 1
+        },
+        {
+          "id": 4,
+          "question": "Co jest wynikiem dzielenia 0 przez 1?",
+          "options": ["0", "1", "Nieokreślone", "Nieskończoność"],
+          "correctOption": 0
+        },
+        {
+          "id": 5,
+          "question": "Ile stopni ma kąt prosty?",
+          "options": ["45", "90", "180", "360"],
+          "correctOption": 1
+        },
+        {
+          "id": 6,
+          "question": "Co jest wynikiem potęgowania 2 do potęgi 3?",
+          "options": ["6", "8", "9", "12"],
+          "correctOption": 1
+        }
+      ]
+    }
+  ]
+}
