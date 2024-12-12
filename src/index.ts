@@ -1,7 +1,7 @@
 import allTestsDataJson from '../data/testQuestions.json';
 import { AllTestsData } from './interfaces/TestInterfaces';
 import { renderStartView } from './renderers/StartView';
-import { Test } from './classes/Test';
+import { Quiz } from './classes/Quiz';
 import { renderQuestionView } from './renderers/QuestionView';
 
 const allTestsData = allTestsDataJson as AllTestsData;
@@ -13,12 +13,12 @@ if (appContainer) {
 }
 
 function startTest(testId: number) {
-    const selectedTest = allTestsData.tests.find((test) => test.id === testId)!;
-    const test = new Test(selectedTest.questions);
-    test.start();
+    const selectedTest = allTestsData.tests.find((t) => t.id === testId)!;
+    const quizInstance = new Quiz(selectedTest.questions);
+    quizInstance.start();
 
     function updateView() {
-        renderQuestionView(appContainer!, selectedTest, test, updateView);
+        renderQuestionView(appContainer!, selectedTest, quizInstance, updateView);
     }
 
     updateView();
