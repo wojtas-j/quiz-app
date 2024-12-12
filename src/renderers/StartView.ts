@@ -5,8 +5,10 @@ export function renderStartView(
     allTestsData: AllTestsData,
     onStart: (testId: number) => void
 ) {
+    container.classList.remove('question-view', 'summary-view');
     container.innerHTML = `
-    <h1>Wybierz test</h1>
+    <h1>Aplikacja z testami</h1>
+    <h2>Wybierz test</h2>
     <ul>
       ${allTestsData.tests
         .map(
