@@ -34,6 +34,8 @@ export function renderSummaryView(container: HTMLElement, testData: TestData, qu
     <button id="return-button">Powrót</button>
   `;
 
+    container.classList.add('summary-view');
+
     const returnButton = container.querySelector('#return-button') as HTMLButtonElement;
     returnButton.addEventListener('click', () => {
         location.reload();

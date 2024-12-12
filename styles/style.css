@@ -1,0 +1,228 @@
+body, h1, h2, h3, h4, h5, h6, p, ul, li, button {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+body {
+    background: #f0f0f0;
+}
+
+#app {
+    max-width: 800px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 20px 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+h1 {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+p {
+    line-height: 1.5;
+    margin-bottom: 15px;
+}
+
+button {
+    background: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background: #0056b3;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 30px 0;
+    display: grid;
+    gap: 15px;
+}
+
+li {
+    text-align: center;
+}
+
+.test-select-button {
+    background: #28a745;
+    transition: background 0.3s;
+}
+
+.test-select-button:hover {
+    background: #218838;
+}
+
+#start-test-button {
+    display: block;
+    margin: 20px auto 0;
+    background: #ffc107;
+    color: #000;
+}
+
+#start-test-button:hover {
+    background: #e0a800;
+}
+
+#app.question-view {
+    background: #fafafa;
+}
+
+#app.question-view h1 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+#app.question-view p {
+    margin-bottom: 10px;
+}
+
+#app.question-view ul {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 20px;
+    padding: 0;
+    list-style: none;
+}
+
+#app.question-view li {
+    flex: 1 1 auto;
+    min-width: 150px;
+}
+
+#app.question-view li label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px;
+    background: #f9f9f9;
+    border-radius: 5px;
+    transition: background 0.3s;
+    cursor: pointer;
+}
+
+#app.question-view li label:hover {
+    background: #e9e9e9;
+}
+
+#prev-button, #next-button, #finish-button, #cancel-button {
+    margin-right: 10px;
+    margin-top: 20px;
+}
+
+#finish-button:disabled {
+    background: #aaa;
+    cursor: not-allowed;
+}
+
+#question-time, #total-time {
+    margin-top: 20px;
+    font-weight: bold;
+    font-size: 1rem;
+    text-align: center;
+    color: #555;
+}
+
+#app.summary-view {
+    background: linear-gradient(to bottom right, #f0f9ff, #e0f7fa);
+}
+
+#app.summary-view h1 {
+    font-size: 2.2rem;
+    margin-bottom: 30px;
+    text-align: center;
+    color: #343a40;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+#app.summary-view p {
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: #555;
+}
+
+#app.summary-view h2 {
+    font-size: 1.8rem;
+    margin: 40px 0 20px 0;
+    text-align: center;
+    color: #343a40;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+}
+
+#app.summary-view .summary-question {
+    background: #ffffffee;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.1);
+}
+
+#app.summary-view .summary-question p strong {
+    font-weight: bold;
+    color: #333;
+}
+
+#app.summary-view .correct-answer {
+    color: #28a745;
+    font-weight: bold;
+}
+
+#app.summary-view .incorrect-answer {
+    color: #dc3545;
+    font-weight: bold;
+}
+
+#app.summary-view hr {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin: 20px 0;
+}
+
+#app.summary-view #return-button {
+    display: block;
+    margin: 40px auto 0;
+    background-color: #17a2b8;
+    font-size: 1.1rem;
+    padding: 12px 25px;
+    border-radius: 8px;
+}
+
+#app.summary-view #return-button:hover {
+    background-color: #138496;
+}
+
+#app.summary-view p strong {
+    color: #000;
+}
+
+#app.summary-view p:first-of-type {
+    font-size: 1.2rem;
+    margin-top: 20px;
+    text-align: center;
+    color: #000;
+    font-weight: bold;
+}
+
+#app.summary-view p:nth-of-type(2),
+#app.summary-view p:nth-of-type(3) {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #444;
+    font-weight: bold;
+}

@@ -53,6 +53,8 @@ export function renderQuestionView(
     <p id="total-time">Łączny czas: 0 s</p>
   `;
 
+    container.classList.add('question-view');
+
     if (!isLocked && questionChanged) {
         quiz.startQuestionTimer();
     }
