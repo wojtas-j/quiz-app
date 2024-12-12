@@ -23,6 +23,9 @@ export function renderQuestionView(
     const questionChanged = (lastRenderedQuestionIndex !== currentIndex);
     lastRenderedQuestionIndex = currentIndex;
 
+    const prevDisabled = currentIndex === 0 ? 'disabled' : '';
+    const nextDisabled = currentIndex === totalQuestions - 1 ? 'disabled' : '';
+
     container.innerHTML = `
     <h1>${testData.title}</h1>
     <p>${testData.introduction}</p>
@@ -44,8 +47,8 @@ export function renderQuestionView(
     }).join('')}
     </ul>
     <div>
-      ${currentIndex > 0 ? '<button id="prev-button">Poprzedni</button>' : ''}
-      <button id="next-button">Następny</button>
+      <button id="prev-button" ${prevDisabled}>Poprzedni</button>
+      <button id="next-button" ${nextDisabled}>Następny</button>
       <button id="finish-button" ${quiz.isTestComplete() ? '' : 'disabled'}>Zakończ</button>
       <button id="cancel-button">Anuluj</button>
     </div>
@@ -73,17 +76,17 @@ export function renderQuestionView(
     });
 
     const prevButton = container.querySelector('#prev-button') as HTMLButtonElement;
-    if (prevButton) {
-        prevButton.addEventListener('click', () => {
-            stopTimers();
-            quiz.stopQuestionTimerAndLockIfAnswered();
-            quiz.previousQuestion();
-            onUpdate();
-        });
-    }
+    prevButton.addEventListener('click', () => {
+        if (prevButton.disabled) return;
+        stopTimers();
+        quiz.stopQuestionTimerAndLockIfAnswered();
+        quiz.previousQuestion();
+        onUpdate();
+    });
 
     const nextButton = container.querySelector('#next-button') as HTMLButtonElement;
     nextButton.addEventListener('click', () => {
+        if (nextButton.disabled) return;
         stopTimers();
         quiz.stopQuestionTimerAndLockIfAnswered();
         quiz.nextQuestion();
