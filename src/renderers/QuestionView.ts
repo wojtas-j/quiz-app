@@ -1,4 +1,4 @@
-import { Test } from '../classes/Test';
+import { Quiz } from '../classes/Quiz';
 import { TestData } from '../interfaces/TestInterfaces';
 import { renderSummaryView } from './SummaryView';
 
@@ -8,18 +8,18 @@ let questionTimerInterval: number | null = null;
 export function renderQuestionView(
     container: HTMLElement,
     testData: TestData,
-    test: Test,
+    quiz: Quiz,
     onUpdate: () => void
 ) {
     stopTimers();
 
-    const question = test.getCurrentQuestion();
-    const totalQuestions = test.getQuestionsCount();
-    const currentQuestionNumber = test.getCurrentQuestionIndex() + 1;
+    const question = quiz.getCurrentQuestion();
+    const totalQuestions = quiz.getQuestionsCount();
+    const currentQuestionNumber = quiz.getCurrentQuestionIndex() + 1;
     const qId = question.id;
-    const isLocked = test.isQuestionLocked(qId);
+    const isLocked = quiz.isQuestionLocked(qId);
 
-    const currentIndex = test.getCurrentQuestionIndex();
+    const currentIndex = quiz.getCurrentQuestionIndex();
     const questionChanged = (lastRenderedQuestionIndex !== currentIndex);
     lastRenderedQuestionIndex = currentIndex;
 
@@ -30,7 +30,7 @@ export function renderQuestionView(
     <p>${question.question}</p>
     <ul>
       ${question.options.map((option, index) => {
-        const userAnswer = test.getAnswers().get(qId);
+        const userAnswer = quiz.getAnswers().get(qId);
         return `
         <li>
           <label>
@@ -46,16 +46,15 @@ export function renderQuestionView(
     <div>
       ${currentIndex > 0 ? '<button id="prev-button">Poprzedni</button>' : ''}
       <button id="next-button">Następny</button>
-      <button id="finish-button" ${test.isTestComplete() ? '' : 'disabled'}>Zakończ</button>
+      <button id="finish-button" ${quiz.isTestComplete() ? '' : 'disabled'}>Zakończ</button>
       <button id="cancel-button">Anuluj</button>
     </div>
     <p id="question-time">Czas nad pytaniem: 0 s</p>
     <p id="total-time">Łączny czas: 0 s</p>
   `;
 
-    // Jeśli pytanie nie jest zablokowane i faktycznie zmieniliśmy pytanie, startujemy licznik od zera
     if (!isLocked && questionChanged) {
-        test.startQuestionTimer();
+        quiz.startQuestionTimer();
     }
 
     startTimers();
@@ -65,7 +64,7 @@ export function renderQuestionView(
         input.addEventListener('change', () => {
             if (!isLocked) {
                 const selectedOptionIndex = parseInt((input as HTMLInputElement).value);
-                test.answerCurrentQuestion(selectedOptionIndex);
+                quiz.answerCurrentQuestion(selectedOptionIndex);
                 onUpdate();
             }
         });
@@ -75,8 +74,8 @@ export function renderQuestionView(
     if (prevButton) {
         prevButton.addEventListener('click', () => {
             stopTimers();
-            test.stopQuestionTimerAndLockIfAnswered();
-            test.previousQuestion();
+            quiz.stopQuestionTimerAndLockIfAnswered();
+            quiz.previousQuestion();
             onUpdate();
         });
     }
@@ -84,17 +83,17 @@ export function renderQuestionView(
     const nextButton = container.querySelector('#next-button') as HTMLButtonElement;
     nextButton.addEventListener('click', () => {
         stopTimers();
-        test.stopQuestionTimerAndLockIfAnswered();
-        test.nextQuestion();
+        quiz.stopQuestionTimerAndLockIfAnswered();
+        quiz.nextQuestion();
         onUpdate();
     });
 
     const finishButton = container.querySelector('#finish-button') as HTMLButtonElement;
     finishButton.addEventListener('click', () => {
         stopTimers();
-        test.stopQuestionTimerAndLockIfAnswered();
-        test.finishTest();
-        renderSummaryView(container, testData, test);
+        quiz.stopQuestionTimerAndLockIfAnswered();
+        quiz.finishTest();
+        renderSummaryView(container, testData, quiz);
     });
 
     const cancelButton = container.querySelector('#cancel-button') as HTMLButtonElement;
@@ -120,21 +119,19 @@ export function renderQuestionView(
         const questionTimeElement = document.getElementById('question-time')!;
         const totalTimeElement = document.getElementById('total-time')!;
 
-        const q = test.getCurrentQuestion();
+        const q = quiz.getCurrentQuestion();
         const qId = q.id;
-        const isLocked = test.isQuestionLocked(qId);
+        const isLocked = quiz.isQuestionLocked(qId);
 
-        const totalTestTime = Date.now() - test.getStartTime();
+        const totalTestTime = Date.now() - quiz.getStartTime();
         totalTimeElement.textContent = `Łączny czas: ${Math.floor(totalTestTime / 1000)} s`;
 
         if (isLocked) {
-            // Pytanie zablokowane: wyświetlamy finalny czas
-            const finalTime = test.getFinalQuestionTime(qId);
+            const finalTime = quiz.getFinalQuestionTime(qId);
             questionTimeElement.textContent = `Czas nad pytaniem: ${Math.floor(finalTime / 1000)} s`;
         } else {
-            // Pytanie niezablokowane: czas to accumulated + (aktualny przebieg od questionStartTime)
-            const accumulated = test.getAccumulatedTimeForQuestion(qId);
-            const currentElapsed = Date.now() - test.getQuestionStartTime();
+            const accumulated = quiz.getAccumulatedTimeForQuestion(qId);
+            const currentElapsed = Date.now() - quiz.getQuestionStartTime();
             const displayTime = accumulated + currentElapsed;
             questionTimeElement.textContent = `Czas nad pytaniem: ${Math.floor(displayTime / 1000)} s`;
         }

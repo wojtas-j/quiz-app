@@ -1,16 +1,13 @@
 import { Question } from '../interfaces/TestInterfaces';
 
-export class Test {
+export class Quiz {
     private questions: Question[];
     private currentQuestionIndex: number = 0;
     private startTime: number = 0;
     private questionStartTime: number = 0;
     private totalTime: number = 0;
     private finalQuestionTimes: Map<number, number> = new Map();
-
-    // NOWA MAPA dla akumulacji czasu poszczególnych pytań
     private accumulatedTimes: Map<number, number> = new Map();
-
     private answers: Map<number, number> = new Map();
     private lockedQuestions: Set<number> = new Set();
 
@@ -31,7 +28,6 @@ export class Test {
         }
     }
 
-    // Metoda do zatrzymania timera dla bieżącego pytania i zaktualizowania zliczonego czasu
     private pauseQuestionTimer() {
         const qId = this.getCurrentQuestion().id;
         const elapsed = Date.now() - this.questionStartTime;
@@ -41,10 +37,9 @@ export class Test {
 
     stopQuestionTimerAndLockIfAnswered() {
         const qId = this.getCurrentQuestion().id;
-        this.pauseQuestionTimer(); // zawsze pauzujemy czas niezależnie od odpowiedzi
+        this.pauseQuestionTimer();
 
         if (this.answers.has(qId) && !this.isQuestionLocked(qId)) {
-            // Pytanie ma udzieloną odpowiedź i nie jest zablokowane -> blokujemy i zapisujemy czas ostateczny
             this.lockedQuestions.add(qId);
             const finalTime = this.accumulatedTimes.get(qId) || 0;
             this.finalQuestionTimes.set(qId, finalTime);
@@ -68,7 +63,6 @@ export class Test {
         this.stopQuestionTimerAndLockIfAnswered();
         if (this.currentQuestionIndex < this.questions.length - 1) {
             this.currentQuestionIndex++;
-            // Rozpoczynamy zliczanie czasu od nowa dla nowego pytania
             this.startQuestionTimer();
         }
     }
@@ -77,7 +71,6 @@ export class Test {
         this.stopQuestionTimerAndLockIfAnswered();
         if (this.currentQuestionIndex > 0) {
             this.currentQuestionIndex--;
-            // Rozpoczynamy zliczanie czasu od nowa dla poprzedniego pytania
             this.startQuestionTimer();
         }
     }
@@ -87,7 +80,6 @@ export class Test {
     }
 
     finishTest() {
-        // Zatrzymujemy licznik całkowity
         this.totalTime = Date.now() - this.startTime;
         this.saveResults();
     }
@@ -120,7 +112,6 @@ export class Test {
         return this.totalTime;
     }
 
-    // NOWA METODA: zwraca dotychczasowy zgromadzony czas dla pytania
     getAccumulatedTimeForQuestion(questionId: number): number {
         return this.accumulatedTimes.get(questionId) || 0;
     }

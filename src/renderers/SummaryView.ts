@@ -1,16 +1,16 @@
-import { Test } from '../classes/Test';
+import { Quiz } from '../classes/Quiz';
 import { TestData } from '../interfaces/TestInterfaces';
 
-export function renderSummaryView(container: HTMLElement, testData: TestData, test: Test) {
-    const correctAnswers = test.calculateCorrectAnswers();
+export function renderSummaryView(container: HTMLElement, testData: TestData, quiz: Quiz) {
+    const correctAnswers = quiz.calculateCorrectAnswers();
     const totalQuestions = testData.questions.length;
-    const totalTimeSeconds = Math.floor(test.getTotalTime() / 1000);
+    const totalTimeSeconds = Math.floor(quiz.getTotalTime() / 1000);
 
     let questionStats = '';
     testData.questions.forEach((question) => {
-        const timeSpent = test.getFinalQuestionTime(question.id);
+        const timeSpent = quiz.getFinalQuestionTime(question.id);
         const timeSpentSeconds = Math.floor(timeSpent / 1000);
-        const userAnswerIndex = test.getAnswers().get(question.id);
+        const userAnswerIndex = quiz.getAnswers().get(question.id);
         const isCorrect = userAnswerIndex === question.correctOption;
 
         questionStats += `
